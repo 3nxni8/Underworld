@@ -8,6 +8,7 @@ export const products: ProductsType = [
     description:
       "Jordan 1 Retro High OG is the classic basketball shoe that puts a fresh spin on what you know best: crisp leather, clean lines and the perfect amount of flash to make you shine.",
     price: 199.99,
+    stock: 10,
     sizes: ["S", "M", "L", "XL"],
     colors: ["red", "black", "gray"],
     image: {
@@ -24,6 +25,7 @@ export const products: ProductsType = [
     description:
       "Air Force 1 '07 is the classic basketball shoe that puts a fresh spin on what you know best: crisp leather, clean lines and the perfect amount of flash to make you shine.",
     price: 149.99,
+    stock: 5,
     sizes: ["S", "M", "L", "XL"],
     colors: ["white", "gray"],
     image: {
@@ -39,6 +41,7 @@ export const products: ProductsType = [
     description:
       "Nike Blazer Mid '77 Vintage is a classic basketball shoe that puts a fresh spin on what you know best: crisp leather, clean lines and the perfect amount of flash to make you shine.",
     price: 129.99,
+    stock: 0,
     sizes: ["S", "M", "L", "XL"],
     colors: ["gray", "pink"],
     image: {
@@ -53,4 +56,9 @@ export const getAllProducts = (): ProductsType => products;
 
 export const getProductById = (id: number): ProductType | undefined =>
   products.find((p) => p.id === id);
+
+export const getProductStock = (productId: number): number => {
+  const product = getProductById(productId);
+  return product?.stock ?? 0;
+};
 

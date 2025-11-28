@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import type { ProductType } from "@/types";
+import { formatPrice } from "@/lib/utils";
 
 type ProductCardProps = {
   product: ProductType;
@@ -16,6 +17,8 @@ const ProductCard = ({ product }: ProductCardProps) => {
     (defaultColor ? product.image[defaultColor] : undefined) ??
     Object.values(product.image)[0];
   const imageSrc = Array.isArray(firstVal) ? firstVal[0] : firstVal;
+
+  const isOutOfStock = product.stock <= 0;
 
   useEffect(() => {
     const id = requestAnimationFrame(() => setIsVisible(true));
@@ -45,6 +48,15 @@ const ProductCard = ({ product }: ProductCardProps) => {
             />
           )}
 
+          {/* Out of stock overlay */}
+          {isOutOfStock && (
+            <div className="absolute inset-0 flex items-center justify-center bg-black/40">
+              <span className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-neutral-900">
+                Out of Stock
+              </span>
+            </div>
+          )}
+
           {/* Top-left category badge */}
           {product.category && (
             <span className="absolute left-3 top-3 z-10 rounded-full bg-white/85 px-2.5 py-1 text-xs font-medium text-neutral-800 shadow-sm backdrop-blur">
@@ -54,7 +66,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
 
           {/* Top-right price pill */}
           <span className="absolute right-3 top-3 z-10 rounded-full bg-neutral-900/85 px-2.5 py-1 text-xs font-semibold text-white shadow-sm backdrop-blur">
-            ${product.price.toFixed(2)}
+            {formatPrice(product.price)}
           </span>
 
           {/* Bottom overlay (name left, colors right; always visible) */}
