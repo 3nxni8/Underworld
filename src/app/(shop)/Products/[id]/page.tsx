@@ -1,5 +1,5 @@
 import { getProductById } from "@/constants/products";
-import ProductDetails from "@/components/Products/ProductDetails";
+import ProductDetails from "@/components/Products/ProductInteraction";
 import { notFound } from "next/navigation";
 
 type PageParams = {

@@ -1,6 +1,6 @@
 import { getProductById } from "@/constants/products";
 import Image from "next/image";
-import PaymentButton from "@/components/ui/PaymentButton";
+import PaymentForm from "@/components/ui/PaymentForm";
 
 type PageProps = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
@@ -67,7 +67,7 @@ export default async function CheckoutPage({ searchParams }: PageProps) {
         {/* Payment section */}
         <div className="rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm">
           <div className="mb-4 text-sm font-medium text-neutral-800">Payment</div>
-          <PaymentButton
+          <PaymentForm
             name={product ? `${product.name}${size || color ? ` (${size || ""}${size && color ? ", " : ""}${color || ""})` : ""}` : ""}
             amount={product ? product.price : 0}
             quantity={Math.max(1, qty)}

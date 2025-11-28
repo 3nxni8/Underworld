@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import PaymentButton from "@/components/ui/PaymentButton";
+import PaymentForm from "@/components/ui/PaymentForm";
+
 import { useCart } from "@/context/CartContext";
 import { Button } from "@/components/ui/CustomButton";
 
@@ -54,7 +55,7 @@ export default function CartPage() {
           <div className="rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm">
             <div className="mb-2 text-sm text-neutral-600">Items: {count}</div>
             <div className="mb-4 text-lg font-semibold">Subtotal: ${total.toFixed(2)}</div>
-            <PaymentButton
+            <PaymentForm
               name="Cart subtotal"
               amount={total}
               quantity={1}
