@@ -38,7 +38,7 @@ const Navbaricons: React.FC<NavbarIconProps> = ({
         <span className="relative inline-flex" aria-label={ariaLabel ?? 'Cart'}>
           <ShoppingBagIcon {...baseProps} />
           {!!cartCount && cartCount > 0 && (
-            <span className="absolute -top-1 -right-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-red-500 px-1 text-[10px] leading-none text-white">
+            <span className="absolute -top-1 -right-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-neutral-900 px-1 text-[10px] leading-none text-white">
               {cartCount}
             </span>
           )}

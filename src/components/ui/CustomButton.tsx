@@ -15,9 +15,9 @@ const buttonVariants = cva(
     {
         variants: {
             variant: {
-                // Use project-neutral palette across variants
+                // Use project-neutral palette across variants (monochromatic)
                 default: "bg-neutral-900 text-white hover:bg-neutral-800",
-                destructive: "bg-red-600 text-white hover:bg-red-700",
+                destructive: "bg-neutral-800 text-white hover:bg-neutral-700",
                 outline: "border border-neutral-300 bg-white text-neutral-900 hover:bg-neutral-50",
                 secondary: "bg-neutral-100 text-neutral-900 hover:bg-neutral-200",
                 ghost: "bg-transparent hover:bg-neutral-50 text-neutral-900",
@@ -64,6 +64,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             rightIcon,
             children,
             disabled,
+            type = "button",
             ...props
         },
         ref
@@ -119,7 +120,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                 className={cn(buttonVariants({ variant, size, className }))}
                 ref={ref}
                 disabled={isDisabled}
-                type={(props as any)?.type ?? "button"}
+                type={type}
                 {...props}
             >
                 {buttonContent}

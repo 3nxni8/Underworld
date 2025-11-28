@@ -2,12 +2,13 @@ import { getProductById } from "@/constants/products";
 import ProductDetails from "@/components/Products/ProductInteraction";
 import { notFound } from "next/navigation";
 
-type PageParams = {
-  params: { id: string };
+type PageProps = {
+  params: Promise<{ id: string }>;
 };
 
-export default function ProductDetailPage({ params }: PageParams) {
-  const id = Number(params.id);
+export default async function ProductDetailPage({ params }: PageProps) {
+  const { id: idStr } = await params;
+  const id = Number(idStr);
   const product = Number.isFinite(id) ? getProductById(id) : undefined;
 
   if (!product) return notFound();

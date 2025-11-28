@@ -1,6 +1,7 @@
 import { getProductById } from "@/constants/products";
 import Image from "next/image";
 import PaymentForm from "@/components/ui/PaymentForm";
+import { formatPrice } from "@/lib/utils";
 
 type PageProps = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
@@ -48,13 +49,13 @@ export default async function CheckoutPage({ searchParams }: PageProps) {
                   </div>
                   <div className="text-right">
                     <div className="text-sm text-neutral-500">Unit price</div>
-                    <div className="text-base font-semibold">${product.price.toFixed(2)}</div>
+                    <div className="text-base font-semibold">{formatPrice(product.price)}</div>
                   </div>
                 </div>
                 <div className="mt-3 flex items-center justify-between">
                   <div className="text-sm text-neutral-600">Quantity: {qty}</div>
                   <div className="text-base font-semibold">
-                    ${(product.price * Math.max(1, qty)).toFixed(2)}
+                    {formatPrice(product.price * Math.max(1, qty))}
                   </div>
                 </div>
               </div>
@@ -67,13 +68,7 @@ export default async function CheckoutPage({ searchParams }: PageProps) {
         {/* Payment section */}
         <div className="rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm">
           <div className="mb-4 text-sm font-medium text-neutral-800">Payment</div>
-          <PaymentForm
-            name={product ? `${product.name}${size || color ? ` (${size || ""}${size && color ? ", " : ""}${color || ""})` : ""}` : ""}
-            amount={product ? product.price : 0}
-            quantity={Math.max(1, qty)}
-            image={imageSrc}
-            disabled={!product}
-          />
+          <PaymentForm />
           <div className="mt-4">
             <div className="mb-2 text-xs font-medium text-neutral-500">We accept</div>
             <div className="flex flex-wrap items-center gap-3">
